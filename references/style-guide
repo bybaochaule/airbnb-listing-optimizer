@@ -1,1 +1,172 @@
+# Airbnb Listing Optimizer Style Guide
 
+## Voice
+
+Be clear, practical, specific, and guest-centered. Write like a helpful host who knows the property well and respects guest expectations.
+
+Prefer:
+
+- Concrete nouns over empty adjectives.
+- Guest benefits supported by property facts.
+- Short paragraphs, descriptive headings, and scannable bullets.
+- Honest expectation-setting for tradeoffs.
+- Natural search terms only where they fit the copy.
+
+Avoid:
+
+- Unsupported superlatives such as "best," "perfect," "guaranteed," or "number one."
+- Vague phrases such as "hidden gem," "great location," "cozy vibes," or "everything you need" unless followed by specifics.
+- Keyword stuffing.
+- Exact address details, access instructions, lock codes, or private security details.
+- Discriminatory or exclusionary language.
+- Claims about current platform ranking factors unless verified with current authoritative sources.
+
+## Optimization principles
+
+### 1. Lead with the booking reason
+
+The first sentence should answer why this stay is worth considering. Combine property type, setting, top differentiator, and ideal trip context.
+
+Weak:
+
+```text
+Welcome to our beautiful home with lots of amenities.
+```
+
+Stronger:
+
+```text
+Unwind in a quiet two-bedroom cabin with a private hot tub, wooded deck, and quick access to nearby trailheads.
+```
+
+### 2. Turn features into guest outcomes
+
+Feature-only copy:
+
+```text
+Fast Wi-Fi, desk, and washer/dryer.
+```
+
+Benefit-led copy:
+
+```text
+Settle in for a work-friendly stay with fast Wi-Fi, a real desk, and in-unit laundry for longer trips.
+```
+
+### 3. Be transparent about tradeoffs
+
+Do not hide limitations that affect reviews. Frame them neutrally.
+
+```text
+Please note: the cabin is reached by a gravel road, and winter guests may prefer all-wheel drive.
+```
+
+### 4. Use trip-context positioning safely
+
+Use needs-based language:
+
+- Remote-work stays
+- Weekend escapes
+- Pet-friendly trips
+- Outdoor recreation
+- Longer stays
+- Cooking-focused stays
+- Group trips when layout supports them
+
+Avoid targeting or excluding people based on protected characteristics. It is acceptable to state factual amenities such as crib availability, step-free entry, pet policy, or quiet hours when accurate.
+
+### 5. Treat photo order as a story
+
+A strong photo sequence usually follows:
+
+1. Hero image with the top booking reason.
+2. Main living or gathering area.
+3. Kitchen and dining.
+4. Primary bedroom.
+5. Additional sleeping areas.
+6. Bathrooms.
+7. Outdoor spaces or standout amenities.
+8. Work setup, parking, laundry, pet amenities, accessibility facts, or local context.
+9. Floor plan or layout graphic when available.
+
+Only describe visible photo details if the user supplied the image or described it.
+
+## Audit framework
+
+Score or comment on these areas when auditing:
+
+- Clarity: Does the guest quickly understand what the stay is?
+- Specificity: Are amenities and layout details concrete?
+- Trust: Are limitations, fees, rules, and logistics easy to understand?
+- Conversion: Does the opening sell the strongest reason to book?
+- Search relevance: Are natural guest search phrases present without stuffing?
+- Photo-story alignment: Do photos prove the headline claims?
+- Review risk: Does the listing preempt common complaints?
+- Accuracy: Are all claims supportable?
+
+## Title guidance
+
+Good title options are specific, benefit-led, and varied. Create options that emphasize different booking reasons, such as view, hot tub, walkability, workspace, pet policy, design, outdoor access, or group layout.
+
+Avoid title options that differ only by punctuation or word order.
+
+## Default output template
+
+```text
+Assumptions and missing inputs
+- ...
+
+Positioning
+One sentence describing the strongest booking reason.
+
+Audit notes
+- Clarity: ...
+- Trust: ...
+- Conversion: ...
+- Photo/story: ...
+
+Optimized title options
+1. ...
+2. ...
+3. ...
+
+Opening summary
+...
+
+Full listing description
+...
+
+Amenity bullets
+- ...
+
+Photo order and captions
+1. ...
+
+Accuracy and compliance notes
+- ...
+
+Priority next steps
+1. ...
+```
+
+## Edge cases
+
+### Current Airbnb policy or algorithm questions
+
+Use current authoritative sources before answering. If no source is checked, state that platform rules and marketplace mechanics can change and should be verified.
+
+### Legal, tax, zoning, permit, HOA, lease, or insurance questions
+
+Do not give professional advice. Provide a general checklist of topics to verify with qualified local sources.
+
+### Competitor research
+
+Do not scrape, copy, or imitate competitor listing text. If the user provides lawful notes, summarize high-level positioning patterns and create original copy.
+
+### Accessibility claims
+
+Use precise facts only, such as step-free entry, doorway width, elevator access, shower type, parking distance, or stair count. Do not use broad claims such as "fully accessible" unless verified by the user.
+
+### Location claims
+
+Use exact distances or travel times only if supplied or verified. Otherwise, use general phrasing such as "near," "a short drive to," or "convenient for" and flag verification needs.
