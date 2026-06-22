@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""Deterministic helper for Airbnb Listing Optimizer.
+
+This helper performs lightweight text checks on a listing title and description.
+It does not call external services, scrape websites, or make policy claims.
+
+Usage:
+    python scripts/example_helper.py --title "Cabin with hot tub" --description "..."
+    python scripts/example_helper.py --input listing.json
+
+JSON input shape:
+    {"title": "...", "description": "...", "amenities": ["hot tub", "parking"]}
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+VAGUE_PHRASES = [
+    "hidden gem",
+    "great location",
+    "everything you need",
+    "perfect for everyone",
+    "best place",
+    "cozy vibes",
+    "must see",
+]
+
+UNSUPPORTED_SUPERLATIVES = [
+    "best",
+    "number one",
+    "guaranteed",
+    "perfect",
+    "unbeatable",
+]
+
+SENSITIVE_TERMS = [
+    "lock code",
+    "door code",
+    "exact address",
+    "security code",
+    "gate code",
+]
+
+BASIC_DETAIL_TERMS = [
+    "bedroom",
+    "bathroom",
+    "parking",
+    "wifi",
+    "kitchen",
+    "laundry",
+    "check-in",
+    "pet",
+    "workspace",
+    "stairs",
+]
+
+
+def normalize(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip().lower())
+
+
+def word_count(text: str) -> int:
+    return len(re.findall(r"\b[\w'-]+\b", text))
+
+
+def repeated_words(text: str, minimum: int = 4) -> list[dict[str, Any]]:
+    words = [w for w in re.findall(r"\b[a-z][a-z'-]{3,}\b", normalize(text))]
+    ignored = {"with", "that", "this", "your", "from", "have", "stay", "home", "guest", "guests"}
+    counts = Counter(w for w in words if w not in ignored)
+    return [
+        {"word": word, "count": count}
+        for word, count in counts.most_common()
+        if count >= minimum
+    ][:10]
+
+
+def find_phrases(text: str, phrases: list[str]) -> list[str]:
+    low = normalize(text)
+    return [phrase for phrase in phrases if phrase in low]
+
+
+def analyze(title: str, description: str, amenities: list[str] | None = None) -> dict[str, Any]:
+    amenities = amenities or []
+    combined = f"{title} {description}"
+    combined_low = normalize(combined)
+    mentioned_details = [term for term in BASIC_DETAIL_TERMS if term in combined_low]
+    amenity_mentions = [amenity for amenity in amenities if normalize(amenity) in combined_low]
+
+    suggestions: list[str] = []
+    if not title.strip():
+        suggestions.append("Add a specific, benefit-led title.")
+    if word_count(description) < 80:
+        suggestions.append("Description may be too thin; add concrete layout, amenity, and logistics details.")
+    if len(mentioned_details) < 4:
+        suggestions.append("Add more factual details about layout, amenities, logistics, or tradeoffs.")
+    if find_phrases(combined, VAGUE_PHRASES):
+        suggestions.append("Replace vague phrases with specific proof points.")
+    if find_phrases(combined, UNSUPPORTED_SUPERLATIVES):
+        suggestions.append("Check superlatives and remove unsupported ranking or guarantee language.")
+    if find_phrases(combined, SENSITIVE_TERMS):
+        suggestions.append("Remove sensitive access or address details from public listing copy.")
+    if amenities and len(amenity_mentions) < max(1, min(3, len(amenities))):
+        suggestions.append("Mention more of the most important supplied amenities in guest-benefit language.")
+
+    return {
+        "title_word_count": word_count(title),
+        "description_word_count": word_count(description),
+        "vague_phrases_found": find_phrases(combined, VAGUE_PHRASES),
+        "superlatives_to_verify": find_phrases(combined, UNSUPPORTED_SUPERLATIVES),
+        "sensitive_terms_found": find_phrases(combined, SENSITIVE_TERMS),
+        "repeated_words": repeated_words(combined),
+        "basic_detail_terms_found": mentioned_details,
+        "supplied_amenities_mentioned": amenity_mentions,
+        "suggestions": suggestions,
+    }
+
+
+def load_input(path: Path) -> tuple[str, str, list[str]]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("Input JSON must be an object.")
+    title = str(data.get("title", ""))
+    description = str(data.get("description", ""))
+    raw_amenities = data.get("amenities", [])
+    amenities = [str(item) for item in raw_amenities] if isinstance(raw_amenities, list) else []
+    return title, description, amenities
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Check short-term-rental listing text for basic optimization signals.")
+    parser.add_argument("--title", default="", help="Listing title text.")
+    parser.add_argument("--description", default="", help="Listing description text.")
+    parser.add_argument("--amenity", action="append", default=[], help="Important amenity to check for. May be repeated.")
+    parser.add_argument("--input", type=Path, help="Optional JSON file containing title, description, and amenities.")
+    args = parser.parse_args()
+
+    if args.input:
+        title, description, amenities = load_input(args.input)
+    else:
+        title, description, amenities = args.title, args.description, list(args.amenity)
+
+    result = analyze(title, description, amenities)
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
