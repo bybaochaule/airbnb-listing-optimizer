@@ -1,0 +1,110 @@
+{
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "SKILL.md exists",
+      "ok": true
+    },
+    {
+      "check": "README.md exists",
+      "ok": true
+    },
+    {
+      "check": "agents/openai.yaml exists",
+      "ok": true
+    },
+    {
+      "check": "assets/.gitkeep exists",
+      "ok": true
+    },
+    {
+      "check": "assets/listing-brief-template.md exists",
+      "ok": true
+    },
+    {
+      "check": "references/style-guide.md exists",
+      "ok": true
+    },
+    {
+      "check": "scripts/example_helper.py exists",
+      "ok": true
+    },
+    {
+      "check": "SKILL.md front matter starts with ---",
+      "ok": true
+    },
+    {
+      "check": "front matter includes name",
+      "ok": true
+    },
+    {
+      "check": "front matter includes trigger-friendly description",
+      "ok": true
+    },
+    {
+      "check": "Purpose section present",
+      "ok": true
+    },
+    {
+      "check": "When to use section present",
+      "ok": true
+    },
+    {
+      "check": "Do not use section present",
+      "ok": true
+    },
+    {
+      "check": "Required inputs section present",
+      "ok": true
+    },
+    {
+      "check": "Workflow section present",
+      "ok": true
+    },
+    {
+      "check": "Output format section present",
+      "ok": true
+    },
+    {
+      "check": "Quality checklist section present",
+      "ok": true
+    },
+    {
+      "check": "Safety and privacy section present",
+      "ok": true
+    },
+    {
+      "check": "example_helper.py smoke test exits 0",
+      "ok": true
+    },
+    {
+      "check": "example_helper.py returns JSON",
+      "ok": true
+    }
+  ],
+  "helper_smoke_stderr": "",
+  "helper_smoke_stdout": {
+    "basic_detail_terms_found": [
+      "bedroom",
+      "parking",
+      "wifi",
+      "kitchen",
+      "laundry"
+    ],
+    "description_word_count": 19,
+    "repeated_words": [],
+    "sensitive_terms_found": [],
+    "suggestions": [
+      "Description may be too thin; add concrete layout, amenity, and logistics details."
+    ],
+    "superlatives_to_verify": [],
+    "supplied_amenities_mentioned": [
+      "hot tub",
+      "parking"
+    ],
+    "title_word_count": 4,
+    "vague_phrases_found": []
+  },
+  "skill_name": "airbnb-listing-optimizer",
+  "skill_path": "/mnt/data/.agents/skills/airbnb-listing-optimizer"
+}
