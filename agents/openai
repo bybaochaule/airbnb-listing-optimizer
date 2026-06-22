@@ -1,1 +1,15 @@
+interface:
+  display_name: "Airbnb Listing Optimizer"
+  short_description: "Audits and rewrites Airbnb and short-term-rental listings for truthful, guest-centered conversion improvements."
+  default_prompt: "Optimize this Airbnb listing using property facts, current copy, amenities, photos, reviews, and host goals."
 
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools: []
+  files:
+    - SKILL.md
+    - README.md
+    - references/style-guide.md
+    - assets/listing-brief-template.md
